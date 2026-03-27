@@ -141,6 +141,19 @@ function getMockMetrics(platform: string) {
 }
 
 /**
+ * Fetches all posts for the current user.
+ */
+export async function getPosts(platform?: string) {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return [];
+  let query = supabase.from('posts').select('*').eq('user_id', user.id).order('scheduled_at', { ascending: false });
+  if (platform) query = query.eq('platform', platform.toLowerCase());
+  const { data, error } = await query;
+  if (error) throw error;
+  return data || [];
+}
+
+/**
  * Create Post in Supabase.
  */
 export async function createPost(payload: any) {

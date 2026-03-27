@@ -1,8 +1,10 @@
 /// <reference types="vite/client" />
-import { supabase } from './supabase'
+import { supabase } from './supabase';
+import { callLLMJSON } from './llm';
 import { searchKnowledge } from './ragKnowledgeSeeder'
 import { retrieveUserData, buildContextString } from './rag'
 import { loadMemories, formatMemoriesForContext, extractAndSaveMemories } from './llmMemory'
+import { GoogleGenerativeAI } from '@google/generative-ai'
 
 // ── TYPES ─────────────────────────────────────────────
 export interface ChatMessage {
@@ -245,7 +247,6 @@ export async function streamChatResponse(
       }))
 
     // Use Gemini SDK for streaming
-    const { GoogleGenerativeAI } = await import('@google/generative-ai');
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
     
     if (!apiKey || apiKey.includes('your-gemini')) {

@@ -1,4 +1,5 @@
 import { supabase } from './supabase';
+import { callLLMJSON } from './llm';
 
 export type MemoryType =
   | 'user_preference'
@@ -72,8 +73,6 @@ export async function deleteMemory(userId: string, key: string) {
 }
 
 export async function extractAndSaveMemories(userId: string, question: string, answer: string) {
-  const { callLLMJSON } = await import('./llm');
-
   try {
     const memories = await callLLMJSON(`
       Read this conversation and extract any important facts

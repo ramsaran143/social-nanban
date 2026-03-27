@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { toast } from 'sonner';
-import { Loader2, Sparkles, Mail, Lock, ArrowRight, ShieldCheck, Globe, BarChart3, Rocket, Activity } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+ import React, { useState, useEffect } from 'react';
+ import { toast } from 'sonner';
+ import { Loader2, Sparkles, Mail, Lock, ArrowRight, ShieldCheck, Globe, BarChart3, Rocket, Activity } from 'lucide-react';
+ import { useNavigate } from 'react-router-dom';
+ import { loginWithDjango, registerWithDjango } from '../data/api';
 
 const VAlUES = [
   { icon: BarChart3,  label: 'Precision Analytics', desc: 'Enterprise-grade data processing for actionable social insights.' },
@@ -20,42 +21,58 @@ const Login = () => {
 
   useEffect(() => { setMounted(true); }, []);
 
-  const handleDemoLogin = () => {
-    sessionStorage.setItem('demo_user', JSON.stringify({ email: 'demo@nanban.ai' }));
-    window.location.href = '/dashboard';
+  const handleDemoLogin = async () => {
+    setLoading(true);
+    try {
+      await loginWithDjango('demo', 'demo1234');
+      toast.success('Strategy Hub Initialized (Demo Mode)');
+      navigate('/dashboard');
+    } catch (err) {
+      toast.error('Demo backend is not reachable. Using local fallback.');
+      sessionStorage.setItem('demo_user', JSON.stringify({ email: 'demo@nanban.ai' }));
+      window.location.href = '/dashboard';
+    } finally { setLoading(false); }
   };
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
+      // 1. Try Django Backend Auth
+      try {
+        if (isSignUp) {
+          await registerWithDjango({ username: email.split('@')[0], email, password });
+          toast.success('Registration successful. Redirecting to access hub...');
+          setIsSignUp(false);
+          setLoading(false);
+          return;
+        } else {
+          await loginWithDjango(email, password);
+          toast.success('Authentication confirmed via Backend.');
+          navigate('/dashboard');
+          return;
+        }
+      } catch (backendErr) {
+        console.warn("Backend Auth failed, falling back to Supabase...");
+      }
+
+      // 2. Fallback to Supabase
       const { supabase } = await import('../data/supabase');
-      
       const { data, error } = isSignUp
         ? await supabase.auth.signUp({ email, password })
         : await supabase.auth.signInWithPassword({ email, password });
       
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
       
       if (isSignUp) {
-        toast.success('Registration successful. You can now access the hub.');
+        toast.success('Registration successful (Cloud). You can now access the hub.');
         setIsSignUp(false);
       } else {
-        toast.success('Authentication confirmed.');
-        if (data?.session) {
-           navigate('/dashboard');
-        }
+        toast.success('Authentication confirmed (Cloud).');
+        if (data?.session) navigate('/dashboard');
       }
     } catch (err: any) {
-      if (err.message.includes('Invalid login credentials')) {
-        toast.error('Incorrect email or security phrase.');
-      } else if (err.message.includes('User already registered')) {
-        toast.error('This business email is already registered.');
-      } else {
-        toast.error(err.message || 'Authentication failed. Please verify your connection.');
-      }
+      toast.error(err.message || 'Authentication failed. Please verify your connection.');
     } finally {
       setLoading(false);
     }

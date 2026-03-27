@@ -49,38 +49,14 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      // 1. Try Django Backend Auth
-      try {
-        if (isSignUp) {
-          await registerWithDjango({ username: email.split('@')[0], email, password });
-          toast.success('Registration successful. Redirecting to access hub...');
-          setIsSignUp(false);
-          setLoading(false);
-          return;
-        } else {
-          await loginWithDjango(email, password);
-          toast.success('Authentication confirmed via Backend.');
-          navigate('/dashboard');
-          return;
-        }
-      } catch (backendErr) {
-        console.warn("Backend Auth failed, falling back to Supabase...");
-      }
-
-      // 2. Fallback to Supabase
-      // 2. Fallback to Supabase
-      const { data, error } = isSignUp
-        ? await supabase.auth.signUp({ email, password })
-        : await supabase.auth.signInWithPassword({ email, password });
-      
-      if (error) throw error;
-      
       if (isSignUp) {
-        toast.success('Registration successful (Cloud). You can now access the hub.');
+        await registerWithDjango({ username: email.split('@')[0], email, password });
+        toast.success('Registration successful. Redirecting to access hub...');
         setIsSignUp(false);
       } else {
-        toast.success('Authentication confirmed (Cloud).');
-        if (data?.session) navigate('/dashboard');
+        await loginWithDjango(email, password);
+        toast.success('Authentication confirmed via Backend.');
+        navigate('/dashboard');
       }
     } catch (err: any) {
       toast.error(err.message || 'Authentication failed. Please verify your connection.');

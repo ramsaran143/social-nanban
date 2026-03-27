@@ -20,7 +20,13 @@ export async function loginWithDjango(email: string, password: string) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ username: email, password })
   });
-  if (!response.ok) throw new Error("Invalid backend credentials.");
+  
+  if (!response.ok) {
+    const errData = await response.json().catch(() => ({}));
+    const message = errData.detail || "Invalid email or password.";
+    throw new Error(message);
+  }
+  
   const data = await response.json();
   localStorage.setItem('access_token', data.access);
   localStorage.setItem('refresh_token', data.refresh);
@@ -37,7 +43,17 @@ export async function registerWithDjango(payload: any) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   });
-  if (!response.ok) throw new Error("Backend registration failed.");
+  
+  if (!response.ok) {
+    const errData = await response.json().catch(() => ({}));
+    // Try to get the first validation message (e.g. email or username)
+    let message = "Backend registration failed.";
+    if (errData.email) message = errData.email[0];
+    else if (errData.username) message = errData.username[0];
+    else if (errData.password) message = errData.password[0];
+    
+    throw new Error(message);
+  }
   return await response.json();
 }
 

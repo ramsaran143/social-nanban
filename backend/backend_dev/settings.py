@@ -46,7 +46,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend_dev.urls'
 
-FRONTEND_DIR = BASE_DIR.parent / 'frontend' / 'dist'
+FRONTEND_DIR = BASE_DIR.parent / 'dist'
 
 TEMPLATES = [
     {

@@ -23,16 +23,26 @@ const Login = () => {
   useEffect(() => { setMounted(true); }, []);
 
   const handleDemoLogin = async () => {
+    setEmail('demo@nanban.ai');
+    setPassword('demo1234');
     setLoading(true);
+    // Visual delay for "typing" feel
+    await new Promise(r => setTimeout(r, 600)); 
     try {
       await loginWithDjango('demo', 'demo1234');
-      toast.success('Strategy Hub Initialized (Demo Mode)');
+      toast.success('Strategy Hub Initialized (Enterprise Mode)');
       navigate('/dashboard');
     } catch (err) {
-      toast.error('Demo backend is not reachable. Using local fallback.');
+      toast.info('Using Local Offline Hub (Mock-First)');
       sessionStorage.setItem('demo_user', JSON.stringify({ email: 'demo@nanban.ai' }));
       window.location.href = '/dashboard';
     } finally { setLoading(false); }
+  };
+
+  const fillDummySignup = () => {
+    setEmail('social_expert@company.com');
+    setPassword('ComplexPassword123!');
+    toast.success('Dummy Registration Data Loaded');
   };
 
   const handleAuth = async (e: React.FormEvent) => {
@@ -160,10 +170,15 @@ const Login = () => {
         </div>
 
         {/* Demo Mode Button */}
-        <div style={{ padding: '16px 20px', background: 'rgba(109,100,255,0.08)', border: '1px solid rgba(109,100,255,0.2)', borderRadius: '16px', marginBottom: '32px', display: 'flex', gap: '14px', alignItems: 'center', cursor: 'pointer', transition: 'all 0.2s' }} onClick={handleDemoLogin} className="hover-lift">
+        <div style={{ padding: '16px 20px', background: 'rgba(109,100,255,0.08)', border: '1px solid rgba(109,100,255,0.2)', borderRadius: '16px', marginBottom: '32px', display: 'flex', gap: '14px', alignItems: 'center', cursor: 'pointer', transition: 'all 0.2s' }} className="hover-lift">
           <Activity size={20} color="#9f96ff" />
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: '14px', fontWeight: 700, color: '#9f96ff' }}>Quick Demo Access</div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                <label style={{ fontSize: '13px', fontWeight: 700, opacity: 0.6 }}>Identity Access</label>
+                <button type="button" onClick={isSignUp ? fillDummySignup : handleDemoLogin} style={{ background: 'rgba(109,100,255,0.1)', border: 'none', color: 'var(--c-prim-2)', fontSize: '11px', fontWeight: 800, padding: '4px 8px', borderRadius: '6px', cursor: 'pointer' }}>
+                  {isSignUp ? '⚡ Use Dummy Data' : '⚡ One-Click Demo'}
+                </button>
+              </div>
             <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.4)', marginTop: '2px' }}>Skip authentication to explore the AI platform locally.</div>
           </div>
           <ArrowRight size={16} color="#9f96ff" />

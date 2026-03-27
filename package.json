@@ -1,26 +1,18 @@
 {
-<<<<<<< HEAD
-  "dependencies": {
-    "date": "^2.0.6",
-    "date-fns": "^4.1.0",
-    "for": "^0.0.1-dev.0",
-    "formatting": "^1.0.6",
-    "throughout": "^0.0.0"
-=======
-  "name": "frontend",
+  "name": "social-nanban",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "seed": "cd backend && venv\\Scripts\\python.exe manage.py seed_social_data"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "@supabase/supabase-js": "^2.99.3",
-    "@types/node": "^25.5.0",
     "ai": "^6.0.134",
     "axios": "^1.13.6",
     "clsx": "^2.1.1",
@@ -39,6 +31,7 @@
     "uuid": "^13.0.0"
   },
   "devDependencies": {
+    "@types/node": "^25.5.0",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "@types/uuid": "^10.0.0",
@@ -51,6 +44,5 @@
     "postcss": "^8.5.8",
     "tailwindcss": "^3.4.19",
     "vite": "^6.4.1"
->>>>>>> 695625a0fcfff09a2463b9ad0a0362da7f8606fb
   }
 }

@@ -153,3 +153,22 @@ export async function createPost(payload: any) {
   if (error) throw error;
   return data;
 }
+/**
+ * AI CONTENT: Call Django Backend Content Agent
+ */
+export async function generateContent(payload: {
+  business_name: string;
+  industry: string;
+  content_type: string;
+  tone: string;
+  target_audience: string;
+  key_message: string;
+}) {
+  const response = await fetch(`${BACKEND_URL}/api/content/generate/`, {
+    method: 'POST',
+    headers: getAuthHeaders(),
+    body: JSON.stringify(payload)
+  });
+  if (!response.ok) throw new Error("Backend Content Generation failed.");
+  return await response.json();
+}

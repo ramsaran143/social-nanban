@@ -1,4 +1,5 @@
  import React, { useState, useEffect } from 'react';
+ import { supabase } from '../data/supabase';
  import { toast } from 'sonner';
  import { Loader2, Sparkles, Mail, Lock, ArrowRight, ShieldCheck, Globe, BarChart3, Rocket, Activity } from 'lucide-react';
  import { useNavigate } from 'react-router-dom';
@@ -57,7 +58,7 @@ const Login = () => {
       }
 
       // 2. Fallback to Supabase
-      const { supabase } = await import('../data/supabase');
+      // 2. Fallback to Supabase
       const { data, error } = isSignUp
         ? await supabase.auth.signUp({ email, password })
         : await supabase.auth.signInWithPassword({ email, password });

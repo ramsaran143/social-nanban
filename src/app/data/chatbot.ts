@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import { supabase } from './supabase'
 import { searchKnowledge } from './ragKnowledgeSeeder'
 import { retrieveUserData, buildContextString } from './rag'
@@ -187,9 +188,9 @@ export async function loadChatHistory(
 
   if (error || !data) return []
 
-  return data.map((row: any) => ({
+  return data.map((row: { id: number, role: string, content: string, created_at: string, metadata: any }) => ({
     id: row.id.toString(),
-    role: row.role as 'user' | 'assistant',
+    role: (row.role === 'assistant' ? 'assistant' : 'user') as 'user' | 'assistant',
     content: row.content,
     timestamp: new Date(row.created_at),
     metadata: row.metadata
@@ -258,7 +259,7 @@ export async function streamChatResponse(
     });
 
     const chat = model.startChat({
-      history: history.slice(0, -1), // Everything except the last message
+      history: history.slice(0, -1) as any, // Gemini history cast for sdk compatibility
     });
 
     // Content for the latest message with context

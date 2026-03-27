@@ -41,7 +41,12 @@ const Dashboard = () => {
   const [niche, setNiche] = useState(() => localStorage.getItem('niche') || 'digital marketing');
   const [weeklyStrategy, setWeeklyStrategy] = useState<WeeklyStrategy | null>(null);
   const [strategyLoading, setStrategyLoading] = useState(false);
-  const [metrics, setMetrics] = useState<any[]>([]);
+  const [metrics, setMetrics] = useState<any[]>([
+    { metric_name: 'Weekly Reach', value: '85.4K', delta: '+12.4%', color: '#6d64ff' },
+    { metric_name: 'Engagement Rate', value: '4.7%', delta: '+0.8%', color: '#00e5a0' },
+    { metric_name: 'Posts Scheduled', value: '12', delta: 'This week', color: '#00d4ff' },
+    { metric_name: 'AI Insights', value: '34', delta: 'Generated', color: '#ffb547' }
+  ]);
 
   useEffect(() => { initDashboard(); }, []);
 

@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import { supabase } from './supabase';
 
 // ── TYPES ─────────────────────────────────────────────
@@ -6,7 +7,7 @@ export type LLMModel =
   | 'claude-opus-4-6'
   | 'gpt-4o'
   | 'gpt-4o-mini'
-  | 'gemini-pro';
+  | 'gemini-2.0-flash';
 
 export type LLMTask =
   | 'content_generation'
@@ -39,15 +40,15 @@ export interface LLMResponse {
 // ── MODEL SELECTOR ────────────────────────────────────
 function selectModel(task: LLMTask): LLMModel {
   const taskModelMap: Record<LLMTask, LLMModel> = {
-    content_generation: 'gemini-pro',
-    analysis:           'gemini-pro',
-    classification:     'gemini-pro',
-    summarization:      'gemini-pro',
-    conversation:       'gemini-pro',
-    code_generation:    'gemini-pro',
-    creative_writing:   'gemini-pro'
+    content_generation: 'gemini-2.0-flash',
+    analysis:           'gemini-2.0-flash',
+    classification:     'gemini-2.0-flash',
+    summarization:      'gemini-2.0-flash',
+    conversation:       'gemini-2.0-flash',
+    code_generation:    'gemini-2.0-flash',
+    creative_writing:   'gemini-2.0-flash'
   };
-  return taskModelMap[task] || 'gemini-pro';
+  return taskModelMap[task] || 'gemini-2.0-flash';
 }
 
 // ── COST CALCULATOR ───────────────────────────────────

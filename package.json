@@ -1,0 +1,56 @@
+{
+<<<<<<< HEAD
+  "dependencies": {
+    "date": "^2.0.6",
+    "date-fns": "^4.1.0",
+    "for": "^0.0.1-dev.0",
+    "formatting": "^1.0.6",
+    "throughout": "^0.0.0"
+=======
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@supabase/supabase-js": "^2.99.3",
+    "@types/node": "^25.5.0",
+    "ai": "^6.0.134",
+    "axios": "^1.13.6",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "eventsource-parser": "^3.0.6",
+    "framer-motion": "^12.38.0",
+    "lucide-react": "^0.577.0",
+    "openai": "^6.32.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.13.1",
+    "recharts": "^3.8.0",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.5.0",
+    "typescript": "^5.9.3",
+    "uuid": "^13.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "@types/uuid": "^10.0.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "autoprefixer": "^10.4.27",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.9",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19",
+    "vite": "^6.4.1"
+>>>>>>> 695625a0fcfff09a2463b9ad0a0362da7f8606fb
+  }
+}

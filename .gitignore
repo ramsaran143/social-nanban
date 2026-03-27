@@ -1,0 +1,40 @@
+# ========================
+# Python / Django Backend
+# ========================
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/**/*.pyc
+backend/**/*.pyo
+backend/.env
+backend/*.env
+backend/db.sqlite3
+backend/staticfiles/
+backend/media/
+
+# ========================
+# Node / React Frontend
+# ========================
+node_modules/
+dist/
+.env
+.env.local
+.env.production
+.vite
+.vercel
+
+# ========================
+# IDE / Editor
+# ========================
+.vscode/
+.idea/
+*.suo
+*.user
+*.log
+
+# ========================
+# OS
+# ========================
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,6 @@
+﻿src/app/data/chatbot.ts(1,8): error TS2613: Module '"C:/Users/ashok/OneDrive/Documents/social nanban/frontend/src/app/data/supabase"' has no default export. Did you mean to use 'import { supabase } from "C:/Users/ashok/OneDrive/Documents/social nanban/frontend/src/app/data/supabase"' instead?
+src/app/data/chatbot.ts(190,19): error TS7006: Parameter 'row' implicitly has an 'any' type.
+src/app/data/chatbot.ts(268,24): error TS2345: Argument of type '{ role: "user" | "assistant"; content: string; }' is not assignable to parameter of type '{ role: "user"; content: string; }'.
+  Types of property 'role' are incompatible.
+    Type '"user" | "assistant"' is not assignable to type '"user"'.
+      Type '"assistant"' is not assignable to type '"user"'.

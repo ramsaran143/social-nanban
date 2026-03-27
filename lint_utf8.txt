@@ -1,0 +1,35 @@
+﻿
+C:\Users\ashok\OneDrive\Documents\social nanban\frontend\src\context\AuthContext.jsx
+  1:8   warning  'React' is defined but never used                                                                                               no-unused-vars
+  6:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\ashok\OneDrive\Documents\social nanban\frontend\src\pages\Analytics.jsx
+  1:8   warning  'React' is defined but never used      no-unused-vars
+  3:10  warning  'LineChart' is defined but never used  no-unused-vars
+  3:21  warning  'Line' is defined but never used       no-unused-vars
+
+C:\Users\ashok\OneDrive\Documents\social nanban\frontend\src\pages\ConnectedAccounts.jsx
+  1:8  warning  'React' is defined but never used  no-unused-vars
+
+C:\Users\ashok\OneDrive\Documents\social nanban\frontend\src\pages\ContentGenerator.jsx
+  1:8  warning  'React' is defined but never used  no-unused-vars
+
+C:\Users\ashok\OneDrive\Documents\social nanban\frontend\src\pages\Dashboard.jsx
+  1:8   warning  'React' is defined but never used    no-unused-vars
+  3:10  warning  'PenTool' is defined but never used  no-unused-vars
+
+C:\Users\ashok\OneDrive\Documents\social nanban\frontend\src\pages\Login.jsx
+   1:8   warning  'React' is defined but never used                                no-unused-vars
+  76:28  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\ashok\OneDrive\Documents\social nanban\frontend\src\pages\Register.jsx
+  1:8  warning  'React' is defined but never used  no-unused-vars
+
+C:\Users\ashok\OneDrive\Documents\social nanban\frontend\src\pages\Scheduler.jsx
+  1:8  warning  'React' is defined but never used  no-unused-vars
+
+C:\Users\ashok\OneDrive\Documents\social nanban\frontend\src\pages\Settings.jsx
+  1:8  warning  'React' is defined but never used  no-unused-vars
+
+Γ£û 14 problems (1 error, 13 warnings)
+
